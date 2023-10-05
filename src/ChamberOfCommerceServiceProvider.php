@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace CodeWithDennis\ChamberOfCommerce;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use CodeWithDennis\ChamberOfCommerce\Commands\ChamberOfCommerceCommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class ChamberOfCommerceServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,10 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('chamber-of-commerce')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_skeleton_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_chamber-of-commerce_table')
+            ->hasCommand(ChamberOfCommerceCommand::class);
     }
 }
