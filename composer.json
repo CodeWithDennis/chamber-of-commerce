@@ -1,6 +1,6 @@
 {
     "name": "codewithdennis/chamber-of-commerce",
-    "description": "Chamber of Commerce API wrapper for Laravel designed to simplify and streamline interactions with the Dutch Chamber of Commerce API.",
+    "description": "A Laravel wrapper tailored for simplifying and enhancing interactions with the Chamber of Commerce API.",
     "keywords": [
         "CodeWithDennis",
         "laravel",
