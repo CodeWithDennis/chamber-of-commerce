@@ -1,6 +1,5 @@
 <?php
 
-// config for CodeWithDennis/ChamberOfCommerce
 return [
-
+    'key' => env('COC_API_KEY'),
 ];
