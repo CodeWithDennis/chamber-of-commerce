@@ -4,7 +4,6 @@ namespace CodeWithDennis\ChamberOfCommerce;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use CodeWithDennis\ChamberOfCommerce\Commands\ChamberOfCommerceCommand;
 
 class ChamberOfCommerceServiceProvider extends PackageServiceProvider
 {
