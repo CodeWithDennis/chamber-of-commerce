@@ -1,6 +1,6 @@
 {
     "name": "codewithdennis/chamber-of-commerce",
-    "description": "Chamber of Commerce API wrapper for PHP / Laravel designed to simplify and streamline interactions with the Dutch Chamber of Commerce API.",
+    "description": "Chamber of Commerce API wrapper for Laravel designed to simplify and streamline interactions with the Dutch Chamber of Commerce API.",
     "keywords": [
         "CodeWithDennis",
         "laravel",
@@ -11,7 +11,6 @@
     "authors": [
         {
             "name": "CodeWithDennis",
-            "email": "-",
             "role": "Developer"
         }
     ],
@@ -22,40 +21,14 @@
     },
     "require-dev": {
         "laravel/pint": "^1.0",
-        "nunomaduro/collision": "^7.8",
-        "orchestra/testbench": "^8.8",
-        "pestphp/pest": "^2.20",
-        "pestphp/pest-plugin-arch": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0"
+        "nunomaduro/collision": "^7.8"
     },
     "autoload": {
         "psr-4": {
-            "CodeWithDennis\\ChamberOfCommerce\\": "src/",
-            "CodeWithDennis\\ChamberOfCommerce\\Database\\Factories\\": "database/factories/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "CodeWithDennis\\ChamberOfCommerce\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
+            "CodeWithDennis\\ChamberOfCommerce\\": "src/"
         }
     },
     "scripts": {
-        "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-chamber-of-commerce --ansi",
-        "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "build": [
-            "@composer run prepare",
-            "@php vendor/bin/testbench workbench:build --ansi"
-        ],
-        "start": [
-            "Composer\\Config::disableProcessTimeout",
-            "@composer run build",
-            "@php vendor/bin/testbench serve"
-        ],
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/pint"
     },
     "config": {
