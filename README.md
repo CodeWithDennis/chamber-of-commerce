@@ -1,10 +1,9 @@
-# Chamber Of Commerce API
-#### Laravel / PHP
+# Chamber Of Commerce API Wrapper (Laravel)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codewithdennis/chamberofcommerce.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/chamberofcommerce)
 [![Total Downloads](https://img.shields.io/packagist/dt/codewithdennis/chamberofcommerce.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/chamberofcommerce)
 
-Chamber of Commerce API wrapper for PHP / Laravel designed to simplify and streamline interactions with the Dutch Chamber of Commerce API.
+Chamber of Commerce API wrapper for Laravel designed to simplify and streamline interactions with the Dutch Chamber of Commerce API.
 
 ## Installation
 
