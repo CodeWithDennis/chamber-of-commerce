@@ -7,16 +7,13 @@ use Illuminate\Support\Facades\Http;
 class ChamberOfCommerce
 {
     private array $queryParameters = [];
-
-    private string $baseUrl;
-
+    private string $baseUrl = 'https://api.kvk.nl/api/v1/';
     private array $headers;
 
     private array $options;
 
     public function __construct()
     {
-        $this->baseUrl = 'https://api.kvk.nl/api/v1/';
         $this->headers = ['apikey' => config('chamber-of-commerce.key')];
         $this->options = ['verify' => false];
     }
