@@ -5,7 +5,7 @@
 
 This [Chamber of Commerce (KvK) API](https://developers.kvk.nl/nl/documentation) wrapper allows you to easily interact with the KvK API to retrieve information about businesses and organizations registered in the Netherlands. For more detailed information visit the official [Kamer van Koophandel](https://developers.kvk.nl/support/faq) website.
 
-![Chamber Of Commerce](https://github.com/CodeWithDennis/chamber-of-commerce/assets/23448484/42796eff-bcf4-4c01-ba4b-286aa462aa5b)
+![Chamber Of Commerce (2)](https://github.com/CodeWithDennis/chamber-of-commerce/assets/23448484/2f892e9b-1927-4355-b1a1-043c12f69caa)
 
 ## Installation
 
