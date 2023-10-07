@@ -1,9 +1,11 @@
-# Chamber Of Commerce API Wrapper
+# Laravel Chamber Of Commerce API
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codewithdennis/chamberofcommerce.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/chamberofcommerce)
 [![Total Downloads](https://img.shields.io/packagist/dt/codewithdennis/chamberofcommerce.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/chamberofcommerce)
 
 This [Chamber of Commerce (KvK) API](https://developers.kvk.nl/nl/documentation) wrapper allows you to easily interact with the KvK API to retrieve information about businesses and organizations registered in the Netherlands. For more detailed information visit the official [Kamer van Koophandel](https://developers.kvk.nl/support/faq) website.
+
+![Chamber Of Commerce](https://github.com/CodeWithDennis/chamber-of-commerce/assets/23448484/78fd63ed-56a5-431e-8b5d-6121a2e2dd76)
 
 ## Installation
 
