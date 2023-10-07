@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Http;
 class ChamberOfCommerce
 {
     private array $queryParameters = [];
+
     private string $baseUrl = 'https://api.kvk.nl/api/v1/';
+
     private array $headers;
 
     private array $options;
