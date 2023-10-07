@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codewithdennis/chamberofcommerce.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/chamberofcommerce)
 [![Total Downloads](https://img.shields.io/packagist/dt/codewithdennis/chamberofcommerce.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/chamberofcommerce)
 
-A Laravel wrapper tailored for simplifying and enhancing interactions with the Chamber of Commerce API from The Netherlands.
+Chamber of Commerce (KvK) API in a Laravel application. It allows you to easily interact with the KvK API to retrieve information about businesses and organizations registered in the Netherlands.
 
 ## Installation
 
@@ -27,10 +27,104 @@ return [
 ];
 ```
 
-## Usage
+## How to Use
+
+Create an instance of the ChamberOfCommerce class to start making API requests:
 
 ```php
-// COMING SOON..
+$chamberOfCommerce = new ChamberOfCommerce();
+```
+
+### Use the search function
+
+Search by KvK number
+```php
+$chamberOfCommerce->number('12345678');
+```
+
+Search by business name number
+
+```php
+$chamberOfCommerce->name('IKEA');
+```
+
+Search by RSIN number
+```php
+$chamberOfCommerce->rsin('123456789');
+```
+
+Include inactive companies in the search results.
+```PHP
+$chamberOfCommerce->withInactiveCompanies(true);
+```
+
+Search by branche number
+```php
+$chamberOfCommerce->branchNumber('B1234');
+```
+
+Search by street name
+
+```PHP
+$chamberOfCommerce->streetName('Hullenbergweg');
+```
+
+Search by postal code (In combination with house number)
+```php
+$chamberOfCommerce->postalCode('1234 AB');
+```
+
+Search by house number (requires postal code)
+```php
+$chamberOfCommerce->houseNumber('2');
+```
+Search by house number addition
+
+```php
+$chamberOfCommerce->houseNumberAddition('A');
+```
+
+Search by location (city, place)
+
+```PHP
+$chamberOfCommerce->location('Amsterdam');
+```
+
+Search by business type
+```php
+// Options: hoofdvestiging (main office), nevenvestiging (branch office), rechtspersoon (legal entity)
+$chamberOfCommerce->type('hoofdvestiging');
+```
+
+Set the page number for pagination (you can use this to iterate through pages)
+```PHP
+$chamberOfCommerce->page(1);
+```
+
+Set the number of results per page.
+```PHP
+$chamberOfCommerce->pagination(10);
+```
+
+After chaining your methods, you can initiate the API request by invoking the "search" function like so:
+
+```php
+$response = $chamberOfCommerce
+    ->name('IKEA')
+    ->location('Amsterdam')
+    ->pagination(5)
+    ->search();
+```
+
+
+### Basic profiles
+To fetch basic profiles for a particular KvK (Chamber of Commerce) number, you can use the following code:
+
+```PHP
+$response = $chamberOfCommerce
+    ->withGeo() // Default: false
+    ->number(33143768)
+    ->profiles();
 ```
 
 ## Changelog

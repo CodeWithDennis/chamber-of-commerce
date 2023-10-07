@@ -6,58 +6,132 @@ use Illuminate\Support\Facades\Http;
 
 class ChamberOfCommerce
 {
-    private static string $baseUrl = 'https://api.kvk.nl/api/v1/';
+    private array $queryParameters = [];
+    private string $baseUrl;
+    private array $headers;
+    private array $options;
 
-    public static function search(
-        string $number = null,
-        string $name = null,
-        string $rsin = null,
-        string $streetName = null,
-        string $houseNumber = null,
-        string $houseNumberAddition = null,
-        string $location = null,
-        string $postalCode = null,
-        string $branchNumber = null,
-        string $type = null,
-        bool $withInactiveCompanies = false,
-        int $page = null,
-        int $pagination = null
-    ) {
-        $queryParameters = [
-            'handelsnaam' => $name,
-            'kvkNummer' => $number,
-            'rsin' => $rsin,
-            'InclusiefInactieveRegistraties' => $withInactiveCompanies ? 'true' : 'false',
-            'vestigingsnummer' => $branchNumber,
-            'straatnaam' => $streetName,
-            'huisnummer' => $houseNumber,
-            'huisnummerToevoeging' => $houseNumberAddition,
-            'postcode' => $postalCode,
-            'plaats' => $location,
-            'type' => $type,
-            'pagina' => $page,
-            'aantal' => $pagination,
-        ];
+    public function __construct()
+    {
+        $this->baseUrl = 'https://api.kvk.nl/api/v1/';
+        $this->headers = ['apikey' => config('chamber-of-commerce.key')];
+        $this->options = ['verify' => false];
+    }
 
-        $results = Http::withHeaders(['apikey' => config('chamber-of-commerce.key')])
-            ->withOptions(['verify' => false])
-            ->get(self::$baseUrl.'zoeken'.'?'.http_build_query(array_filter($queryParameters, fn ($value) => $value !== null)));
+    private function makeRequest(string $endpoint)
+    {
+        // Build the complete URL by combining the base URL and the provided endpoint
+        $url = $this->baseUrl . $endpoint;
 
+        // Add query parameters to the URL
+        if ($endpoint == 'zoeken') {
+            $filteredParameters = array_filter($this->queryParameters, fn($value) => $value !== null);
+            $url .= '?' . http_build_query($filteredParameters);
+        } elseif(str_contains($endpoint, 'basisprofielen') && isset($this->queryParameters['geoData'])) {
+            $url .= '?geoData=' . $this->queryParameters['geoData'];
+        }
+
+        // Send an HTTP GET request to the constructed URL with headers and options
+        $results = Http::withHeaders($this->headers)
+            ->withOptions($this->options)
+            ->get($url);
+
+        // Decode the JSON response and return it
         return json_decode($results->body());
     }
 
-    public static function basicProfiles(
-        string $number = null,
-        ?bool $withGeo = false
-    ) {
-        $queryParameters = [
-            'geoData' => $withGeo ? 'true' : 'false',
-        ];
-
-        $results = Http::withHeaders(['apikey' => config('chamber-of-commerce.key')])
-            ->withOptions(['verify' => false])
-            ->get(self::$baseUrl.'basisprofielen'.'/'.$number.'/?'.http_build_query(array_filter($queryParameters, fn ($value) => $value !== null)));
-
-        return json_decode($results->body());
+    public function number(string $number = null): static
+    {
+        $this->queryParameters['kvkNummer'] = $number;
+        return $this;
     }
+
+    public function name(string $name = null): static
+    {
+        $this->queryParameters['handelsnaam'] = $name;
+        return $this;
+    }
+
+    public function rsin(string $rsin = null): static
+    {
+        $this->queryParameters['rsin'] = $rsin;
+        return $this;
+    }
+
+    public function withInactiveCompanies(bool $withInactiveCompanies = false): static
+    {
+        $this->queryParameters['InclusiefInactieveRegistraties'] = $withInactiveCompanies ? 'true' : 'false';
+        return $this;
+    }
+
+    public function branchNumber(string $branchNumber = null): static
+    {
+        $this->queryParameters['vestigingsnummer'] = $branchNumber;
+        return $this;
+    }
+
+    public function streetName(string $streetName = null): static
+    {
+        $this->queryParameters['straatnaam'] = $streetName;
+        return $this;
+    }
+
+    public function houseNumber(string $houseNumber = null): static
+    {
+        $this->queryParameters['huisnummer'] = $houseNumber;
+        return $this;
+    }
+
+    public function houseNumberAddition(string $houseNumberAddition = null): static
+    {
+        $this->queryParameters['huisnummerToevoeging'] = $houseNumberAddition;
+        return $this;
+    }
+
+    public function location(string $location = null): static
+    {
+        $this->queryParameters['plaats'] = $location;
+        return $this;
+    }
+
+    public function postalCode(string $postalCode = null): static
+    {
+        $this->queryParameters['postcode'] = $postalCode;
+        return $this;
+    }
+
+    public function type(string $type = null): static
+    {
+        $this->queryParameters['type'] = $type;
+        return $this;
+    }
+
+    public function page(int $page = null): static
+    {
+        $this->queryParameters['pagina'] = $page;
+        return $this;
+    }
+
+    public function pagination(int $pagination = null): static
+    {
+        $this->queryParameters['aantal'] = $pagination;
+        return $this;
+    }
+
+    public function withGeo(bool $withGeo = true): static
+    {
+        $this->queryParameters['geoData'] = $withGeo ? 'true' : 'false';
+        return $this;
+    }
+
+    public function profiles()
+    {
+        return $this->makeRequest('basisprofielen/' . $this->queryParameters['kvkNummer']);
+    }
+
+    public function search()
+    {
+        return $this->makeRequest('zoeken');
+    }
+
 }
