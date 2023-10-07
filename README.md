@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codewithdennis/chamberofcommerce.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/chamberofcommerce)
 [![Total Downloads](https://img.shields.io/packagist/dt/codewithdennis/chamberofcommerce.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/chamberofcommerce)
 
-Chamber of Commerce (KvK) API in a Laravel application. It allows you to easily interact with the KvK API to retrieve information about businesses and organizations registered in the Netherlands.
+This [Chamber of Commerce (KvK) API](https://developers.kvk.nl/nl/documentation) wrapper allows you to easily interact with the KvK API to retrieve information about businesses and organizations registered in the Netherlands. For more detailed information visit the official [Kamer van Koophandel](https://developers.kvk.nl/support/faq) website.
 
 ## Installation
 
@@ -28,10 +28,17 @@ return [
 ```
 
 ## How to Use
+Add your API key to the `.env` file
+
+```dotenv
+COC_API_KEY=<YOUR_API_KEY>
+```
 
 Create an instance of the ChamberOfCommerce class to start making API requests:
 
 ```php
+use CodeWithDennis\ChamberOfCommerce\ChamberOfCommerce;
+
 $chamberOfCommerce = new ChamberOfCommerce();
 ```
 
@@ -54,7 +61,7 @@ $chamberOfCommerce->rsin('123456789');
 ```
 
 Include inactive companies in the search results.
-```PHP
+```php
 $chamberOfCommerce->withInactiveCompanies(true);
 ```
 
@@ -65,7 +72,7 @@ $chamberOfCommerce->branchNumber('B1234');
 
 Search by street name
 
-```PHP
+```php
 $chamberOfCommerce->streetName('Hullenbergweg');
 ```
 
@@ -97,12 +104,12 @@ $chamberOfCommerce->type('hoofdvestiging');
 ```
 
 Set the page number for pagination (you can use this to iterate through pages)
-```PHP
+```php
 $chamberOfCommerce->page(1);
 ```
 
 Set the number of results per page.
-```PHP
+```php
 $chamberOfCommerce->pagination(10);
 ```
 
@@ -120,7 +127,7 @@ $response = $chamberOfCommerce
 ### Basic profiles
 To fetch basic profiles for a particular KvK (Chamber of Commerce) number, you can use the following code:
 
-```PHP
+```php
 $response = $chamberOfCommerce
     ->withGeo() // Default: false
     ->number(33143768)
