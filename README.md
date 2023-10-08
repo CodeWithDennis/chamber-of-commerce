@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codewithdennis/chamber-of-commerce.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/chamber-of-commerce)
 [![Total Downloads](https://img.shields.io/packagist/dt/codewithdennis/chamber-of-commerce.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/chamber-of-commerce)
 
-This [Chamber of Commerce (KvK) API](https://developers.kvk.nl/nl/documentation) wrapper allows you to easily interact with the KvK API to retrieve information about businesses and organizations registered in the Netherlands. For more detailed information visit the official [Kamer van Koophandel](https://developers.kvk.nl/support/faq) website.
+This Kamer van Koophandel (Chamber of Commerce) API wrapper enables seamless interaction with the Kamer van Koophandel (Chamber of Commerce) API, enabling you to access information about businesses and organizations registered in the Netherlands. For comprehensive details, please visit the official Kamer van Koophandel website.
 
 ![Chamber Of Commerce (2)](https://github.com/CodeWithDennis/chamber-of-commerce/assets/23448484/2f892e9b-1927-4355-b1a1-043c12f69caa)
 
