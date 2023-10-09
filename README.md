@@ -85,7 +85,7 @@ $chamberOfCommerce->postalCode('1234 AB');
 
 Search by house number (requires postal code)
 ```php
-$chamberOfCommerce->houseNumber('2');
+$chamberOfCommerce->houseNumber(2);
 ```
 Search by house number addition
 
