@@ -6,24 +6,32 @@ use Illuminate\Support\Facades\Http;
 
 class ChamberOfCommerce
 {
-    private array $queryParameters = [];
-
     private string $baseUrl = 'https://api.kvk.nl/api/v1/';
 
-    private array $headers;
+    private string $baseTestUrl = 'https://api.kvk.nl/test/api/v1/';
 
-    private array $options;
+    private bool $testing = false;
 
-    public function __construct()
+    private array $queryParameters = [];
+
+    private function headers(): array
     {
-        $this->headers = ['apikey' => config('chamber-of-commerce.key')];
-        $this->options = ['verify' => false];
+        return [
+            'apikey' => $this->testing ? config('chamber-of-commerce.test_key') : config('chamber-of-commerce.key'),
+        ];
+    }
+
+    private function options(): array
+    {
+        return [
+            'verify' => false,
+        ];
     }
 
     private function makeRequest(string $endpoint)
     {
         // Build the complete URL by combining the base URL and the provided endpoint
-        $url = $this->baseUrl.$endpoint;
+        $url = ($this->testing ? $this->baseTestUrl : $this->baseUrl).$endpoint;
 
         // Add query parameters to the URL
         if ($endpoint == 'zoeken') {
@@ -34,12 +42,19 @@ class ChamberOfCommerce
         }
 
         // Send an HTTP GET request to the constructed URL with headers and options
-        $results = Http::withHeaders($this->headers)
-            ->withOptions($this->options)
+        $results = Http::withHeaders($this->headers())
+            ->withOptions($this->options())
             ->get($url);
 
         // Decode the JSON response and return it
         return json_decode($results->body());
+    }
+
+    public function testing(bool $testing = true): static
+    {
+        $this->testing = $testing;
+
+        return $this;
     }
 
     public function number(string $number = null): static

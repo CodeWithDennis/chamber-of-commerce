@@ -1,10 +1,15 @@
 {
     "name": "codewithdennis/chamber-of-commerce",
-    "description": "A Laravel wrapper tailored for simplifying and enhancing interactions with the Chamber of Commerce API from The Netherlands.",
+    "description": "A PHP wrapper tailored for simplifying and enhancing interactions with the Chamber of Commerce API from The Netherlands.",
     "keywords": [
         "CodeWithDennis",
-        "laravel",
-        "chamber-of-commerce"
+        "Laravel",
+        "Chamber Of Commerce",
+        "Kamer van Koophandel",
+        "Nederland",
+        "PHP",
+        "Bedrijven",
+        "Companies"
     ],
     "homepage": "https://github.com/codewithdennis/chamber-of-commerce",
     "license": "MIT",

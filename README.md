@@ -26,6 +26,7 @@ This is the contents of the published config file:
 ```php
 return [
     'key' => env('COC_API_KEY'),
+    'test_key' => env('COC_API_TEST_KEY'),
 ];
 ```
 
@@ -34,6 +35,7 @@ Add your API key to the `.env` file
 
 ```dotenv
 COC_API_KEY=<YOUR_API_KEY>
+COC_API_TEST_KEY="l7xx1f2691f2520d487b902f4e0b57a0b197"
 ```
 
 Create an instance of the ChamberOfCommerce class to start making API requests:
@@ -125,15 +127,34 @@ $response = $chamberOfCommerce
     ->search();
 ```
 
-
-### Basic profiles
+### [Basic profiles](https://developers.kvk.nl/documentation/basisprofiel-api)
 To fetch basic profiles for a particular KvK (Chamber of Commerce) number, you can use the following code:
 
 ```php
 $response = $chamberOfCommerce
-    ->withGeo() // Default: false
+    ->withGeo()
     ->number(33143768)
     ->profiles();
+```
+
+### [Test environment](https://developers.kvk.nl/documentation/testing)
+To utilize the testing environment, simply add the following method:
+
+```php
+$chamberOfCommerce->testing();
+```
+
+```php
+$chamberOfCommerce
+    ->number(69599084)
+    ->testing()
+    ->search()
+```
+
+Ensure that you include the following key in your `.env` file:
+
+```bash
+COC_API_TEST_KEY="l7xx1f2691f2520d487b902f4e0b57a0b197"
 ```
 
 ## Changelog
