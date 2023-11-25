@@ -7,14 +7,17 @@ use Illuminate\Support\Facades\Http;
 class ChamberOfCommerce
 {
     private string $baseUrl = 'https://api.kvk.nl/api/v1/';
+
     private string $baseTestUrl = 'https://api.kvk.nl/test/api/v1/';
+
     private bool $testing = false;
+
     private array $queryParameters = [];
 
     private function headers(): array
     {
         return [
-            'apikey' => $this->testing ? config('chamber-of-commerce.test_key') : config('chamber-of-commerce.key')
+            'apikey' => $this->testing ? config('chamber-of-commerce.test_key') : config('chamber-of-commerce.key'),
         ];
     }
 
@@ -28,14 +31,14 @@ class ChamberOfCommerce
     private function makeRequest(string $endpoint)
     {
         // Build the complete URL by combining the base URL and the provided endpoint
-        $url = ($this->testing ? $this->baseTestUrl : $this->baseUrl) . $endpoint;
+        $url = ($this->testing ? $this->baseTestUrl : $this->baseUrl).$endpoint;
 
         // Add query parameters to the URL
         if ($endpoint == 'zoeken') {
-            $filteredParameters = array_filter($this->queryParameters, fn($value) => $value !== null);
-            $url .= '?' . http_build_query($filteredParameters);
+            $filteredParameters = array_filter($this->queryParameters, fn ($value) => $value !== null);
+            $url .= '?'.http_build_query($filteredParameters);
         } elseif (str_contains($endpoint, 'basisprofielen') && isset($this->queryParameters['geoData'])) {
-            $url .= '?geoData=' . $this->queryParameters['geoData'];
+            $url .= '?geoData='.$this->queryParameters['geoData'];
         }
 
         // Send an HTTP GET request to the constructed URL with headers and options
@@ -154,7 +157,7 @@ class ChamberOfCommerce
 
     public function profiles()
     {
-        return $this->makeRequest('basisprofielen/' . $this->queryParameters['kvkNummer']);
+        return $this->makeRequest('basisprofielen/'.$this->queryParameters['kvkNummer']);
     }
 
     public function search()
