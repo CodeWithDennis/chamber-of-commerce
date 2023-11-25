@@ -145,7 +145,7 @@ $chamberOfCommerce->testing();
 ```
 
 ```php
-$chamberOfCommerce
+$results = $chamberOfCommerce
     ->number(69599084)
     ->testing()
     ->search()
