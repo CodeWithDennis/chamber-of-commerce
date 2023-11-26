@@ -27,6 +27,7 @@ This is the contents of the published config file:
 return [
     'key' => env('COC_API_KEY'),
     'test_key' => env('COC_API_TEST_KEY'),
+    'test_enabled' => env('COC_API_TEST_ENABLED', false)
 ];
 ```
 
@@ -138,17 +139,10 @@ $response = $chamberOfCommerce
 ```
 
 ### [Test environment](https://developers.kvk.nl/documentation/testing)
-To utilize the testing environment, simply add the following method:
+To utilize the testing environment, simply enable it in your `.env` file:
 
-```php
-$chamberOfCommerce->testing();
-```
-
-```php
-$chamberOfCommerce
-    ->number(69599084)
-    ->testing()
-    ->search()
+```bash
+COC_API_TEST_ENABLED=true
 ```
 
 Ensure that you include the following key in your `.env` file:

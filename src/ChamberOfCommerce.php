@@ -10,14 +10,12 @@ class ChamberOfCommerce
 
     private string $baseTestUrl = 'https://api.kvk.nl/test/api/v1/';
 
-    private bool $testing = false;
-
     private array $queryParameters = [];
 
     private function headers(): array
     {
         return [
-            'apikey' => $this->testing ? config('chamber-of-commerce.test_key') : config('chamber-of-commerce.key'),
+            'apikey' => config('chamber-of-commerce.test_enabled') ? config('chamber-of-commerce.test_key') : config('chamber-of-commerce.key'),
         ];
     }
 
@@ -31,7 +29,7 @@ class ChamberOfCommerce
     private function makeRequest(string $endpoint)
     {
         // Build the complete URL by combining the base URL and the provided endpoint
-        $url = ($this->testing ? $this->baseTestUrl : $this->baseUrl).$endpoint;
+        $url = (config('chamber-of-commerce.test_enabled') ? $this->baseTestUrl : $this->baseUrl).$endpoint;
 
         // Add query parameters to the URL
         if ($endpoint == 'zoeken') {
@@ -48,13 +46,6 @@ class ChamberOfCommerce
 
         // Decode the JSON response and return it
         return json_decode($results->body());
-    }
-
-    public function testing(bool $testing = true): static
-    {
-        $this->testing = $testing;
-
-        return $this;
     }
 
     public function number(string $number = null): static
